@@ -11,7 +11,7 @@ export function Cadre() {
     <>
       <header className="entete">
         <div className="entete-in">
-          <Link to="/" className="marque"><img src="/icon.svg" alt="" /><b>Quali<span>Box</span></b></Link>
+          <Link to="/" className="marque"><img src="/logo-q.png" alt="QualiBox" /><b>Quali<span>Box</span></b></Link>
           <nav>
             <NavLink to="/#outils" className="lien-entete" onClick={() => setTimeout(() => document.getElementById('outils')?.scrollIntoView({ behavior: 'smooth' }), 50)}>Outils</NavLink>
             <NavLink to="/mon-entreprise" className="lien-entete plein">Mon entreprise</NavLink>
@@ -51,6 +51,7 @@ export function Accueil() {
             </div>
           </div>
           <div className="hero-visuel" aria-hidden="true">
+            <img className="hero-logo" src="/icon-512.png" alt="" />
             <div className="carte-flottante cf1">
               <h4>❓ 5 Pourquoi</h4>
               <div className="mini-chaine"><span>P1 · Le four dépasse 250 °C</span><span>P2 · Température non vérifiée</span><span>P3 · Thermomètre en panne</span><span>Cause racine · Pas de plan de maintenance</span></div>

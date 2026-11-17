@@ -1,5 +1,5 @@
 {
-  "rewrites": [{ "source": "/((?!assets/|icon|manifest|sw\\.js).*)", "destination": "/index.html" }],
+  "rewrites": [{ "source": "/((?!assets/|icon|favicon|logo|apple-touch|og-image|manifest|sw\\.js).*)", "destination": "/index.html" }],
   "headers": [
     {
       "source": "/(.*)",

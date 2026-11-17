@@ -7,11 +7,11 @@
 @import '@fontsource/figtree/700.css';
 
 :root {
-  --nuit: #0b1b33;
-  --nuit-2: #13284a;
-  --teal: #0e9f8a;
-  --teal-fonce: #0b7f6e;
-  --teal-pale: #e3f6f2;
+  --nuit: #0a0f0c;
+  --nuit-2: #142319;
+  --teal: #16a34a;
+  --teal-fonce: #15803d;
+  --teal-pale: #e9f9e3;
   --ambre: #f5a524;
   --ambre-pale: #fff4dd;
   --rouge: #e5484d;
@@ -32,12 +32,12 @@ a { color: inherit; }
 button, input, textarea, select { font: inherit; color: inherit; }
 
 /* ---------- Haut de page ---------- */
-.entete { position: sticky; top: 0; z-index: 30; background: rgba(11, 27, 51, 0.96); backdrop-filter: blur(10px); color: #fff; }
+.entete { position: sticky; top: 0; z-index: 30; background: rgba(8, 12, 9, 0.96); backdrop-filter: blur(10px); color: #fff; }
 .entete-in { max-width: 1180px; margin: 0 auto; padding: 12px 18px; display: flex; align-items: center; gap: 12px; }
 .marque { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
-.marque img { width: 34px; height: 34px; }
+.marque img { width: 38px; height: 38px; border-radius: 10px; box-shadow: 0 0 18px rgba(163,230,53,0.35); }
 .marque b { font-family: 'Sora'; font-size: 21px; font-weight: 800; letter-spacing: -0.03em; }
-.marque b span { color: #2dd4bf; }
+.marque b span { color: #a3e635; }
 .entete nav { margin-left: auto; display: flex; gap: 8px; align-items: center; }
 .lien-entete { text-decoration: none; font-weight: 600; font-size: 14px; padding: 9px 14px; border-radius: 999px; color: rgba(255,255,255,0.85); }
 .lien-entete:hover { background: rgba(255,255,255,0.1); color: #fff; }
@@ -46,7 +46,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
 /* ---------- Boutons ---------- */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; cursor: pointer; border-radius: 12px; padding: 12px 18px; font-weight: 700; font-size: 15px; text-decoration: none; transition: transform .15s ease, background .15s ease; }
 .btn:active { transform: scale(0.97); }
-.btn.principal { background: var(--teal); color: #fff; box-shadow: 0 8px 20px rgba(14,159,138,0.3); }
+.btn.principal { background: var(--teal); color: #fff; box-shadow: 0 8px 20px rgba(22,163,74,0.32); }
 .btn.principal:hover { background: var(--teal-fonce); }
 .btn.secondaire { background: #fff; color: var(--encre); border: 1.5px solid var(--trait); }
 .btn.secondaire:hover { border-color: var(--teal); }
@@ -57,25 +57,27 @@ button, input, textarea, select { font: inherit; color: inherit; }
 .btn[disabled] { opacity: .6; cursor: wait; }
 
 /* ---------- Accueil ---------- */
-.hero { background: radial-gradient(1200px 500px at 85% -10%, rgba(45,212,191,0.25), transparent 60%), radial-gradient(800px 400px at -10% 110%, rgba(245,165,36,0.18), transparent 60%), var(--nuit); color: #fff; overflow: hidden; }
+.hero { background: radial-gradient(1200px 500px at 85% -10%, rgba(132,204,22,0.28), transparent 60%), radial-gradient(800px 400px at -10% 110%, rgba(245,165,36,0.18), transparent 60%), var(--nuit); color: #fff; overflow: hidden; }
 .hero-in { max-width: 1180px; margin: 0 auto; padding: 56px 18px 64px; display: grid; gap: 40px; align-items: center; }
 @media (min-width: 900px) { .hero-in { grid-template-columns: 1.1fr 0.9fr; padding: 80px 18px 90px; } }
 .pastille { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.16); font-size: 13px; font-weight: 600; }
-.pastille i { width: 8px; height: 8px; border-radius: 50%; background: #2dd4bf; box-shadow: 0 0 0 4px rgba(45,212,191,0.25); }
+.pastille i { width: 8px; height: 8px; border-radius: 50%; background: #a3e635; box-shadow: 0 0 0 4px rgba(163,230,53,0.25); }
 .hero h1 { font-size: clamp(36px, 6vw, 60px); line-height: 1.04; margin: 18px 0 16px; font-weight: 800; }
-.hero h1 em { font-style: normal; background: linear-gradient(90deg, #2dd4bf, #f5c451); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero h1 em { font-style: normal; background: linear-gradient(90deg, #4ade80, #d9f99d); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .hero p.lead { font-size: 18px; line-height: 1.6; color: rgba(255,255,255,0.8); max-width: 560px; margin: 0 0 26px; }
 .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
 .hero-chiffres { display: flex; gap: 28px; margin-top: 34px; flex-wrap: wrap; }
 .hero-chiffres div b { display: block; font-family: 'Sora'; font-size: 26px; }
 .hero-chiffres div span { font-size: 13px; color: rgba(255,255,255,0.65); }
-.hero-visuel { position: relative; min-height: 340px; }
-.carte-flottante { position: absolute; background: #fff; color: var(--encre); border-radius: 18px; box-shadow: 0 30px 60px rgba(0,0,0,0.35); padding: 16px 18px; }
-.carte-flottante h4 { margin: 0 0 8px; font-size: 14px; }
-.carte-flottante .ligne { height: 9px; border-radius: 6px; background: #e8eef6; margin: 7px 0; }
-.cf1 { top: 0; left: 6%; width: 74%; animation: flotte 6s ease-in-out infinite; }
-.cf2 { top: 46%; right: 0; width: 60%; animation: flotte 7s ease-in-out infinite reverse; }
-.cf3 { bottom: -6px; left: 0; width: 46%; animation: flotte 8s ease-in-out infinite; }
+.hero-visuel { position: relative; min-height: 420px; }
+.hero-logo { position: absolute; left: 50%; top: 46%; width: 400px; max-width: 86%; transform: translate(-50%, -50%); -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 52%, transparent 70%); mask-image: radial-gradient(circle at 50% 50%, #000 52%, transparent 70%); pointer-events: none; }
+.carte-flottante { position: absolute; z-index: 1; background: #fff; color: var(--encre); border-radius: 16px; box-shadow: 0 24px 50px rgba(0,0,0,0.45); padding: 12px 14px; }
+.carte-flottante h4 { margin: 0 0 6px; font-size: 13px; }
+.carte-flottante .ligne { height: 8px; border-radius: 6px; background: #e8eef6; margin: 6px 0; }
+.cf1 { top: 0; left: 0; width: 46%; animation: flotte 6s ease-in-out infinite; }
+.cf2 { bottom: 4%; right: 0; width: 40%; animation: flotte 7s ease-in-out infinite reverse; }
+.cf3 { bottom: 0; left: 4%; width: 32%; animation: flotte 8s ease-in-out infinite; }
+@media (max-width: 899px) { .hero-visuel { min-height: 360px; } .cf1 { width: 58%; } .cf2 { width: 50%; } .cf3 { width: 40%; } }
 @keyframes flotte { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 .mini-chaine { display: grid; gap: 6px; }
 .mini-chaine span { font-size: 12px; padding: 6px 10px; border-radius: 9px; background: var(--teal-pale); color: var(--teal-fonce); font-weight: 600; }
@@ -91,7 +93,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
 
 .grille-outils { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
 .carte-outil { position: relative; display: flex; flex-direction: column; gap: 10px; text-decoration: none; background: #fff; border: 1px solid var(--trait); border-radius: var(--rayon); padding: 20px; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
-.carte-outil:hover { transform: translateY(-4px); box-shadow: var(--ombre); border-color: rgba(14,159,138,0.4); }
+.carte-outil:hover { transform: translateY(-4px); box-shadow: var(--ombre); border-color: rgba(22,163,74,0.45); }
 .carte-outil .ico { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; font-size: 24px; background: var(--teal-pale); }
 .carte-outil h3 { margin: 4px 0 0; font-size: 18px; }
 .carte-outil p { margin: 0; color: var(--gris); font-size: 14.5px; line-height: 1.55; flex: 1; }
@@ -129,7 +131,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
 .panneau h2 { font-size: 17px; margin: 0 0 14px; display: flex; align-items: center; gap: 8px; }
 .panneau h2 .num { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--teal); color: #fff; font-size: 13px; }
 
-.fiche { background: var(--teal-pale); border: 1px solid rgba(14,159,138,0.25); border-radius: var(--rayon); padding: 4px 18px; margin-bottom: 16px; }
+.fiche { background: var(--teal-pale); border: 1px solid rgba(22,163,74,0.28); border-radius: var(--rayon); padding: 4px 18px; margin-bottom: 16px; }
 .fiche summary { cursor: pointer; font-weight: 700; padding: 12px 0; color: var(--teal-fonce); }
 .fiche p, .fiche li { line-height: 1.6; font-size: 14.5px; }
 .fiche ul { padding-left: 18px; }
