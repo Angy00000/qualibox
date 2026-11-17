@@ -1,5 +1,5 @@
 // QualiBox : rend l'application installable et garde l'interface pour un usage hors connexion.
-const CACHE = 'qualibox-v2';
+const CACHE = 'qualibox-v3';
 self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', (e) => e.waitUntil(
   caches.keys().then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim())
