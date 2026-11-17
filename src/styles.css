@@ -255,3 +255,26 @@ button, input, textarea, select { font: inherit; color: inherit; }
 .doc table.amdec { font-size: 10.5px; }
 .doc table.amdec th { font-size: 9px; padding: 7px 5px; letter-spacing: .4px; }
 .doc table.amdec td { padding: 6px 5px; }
+
+/* Accueil : filtres et groupes d'outils */
+.filtres { display: grid; gap: 12px; margin-bottom: 8px; }
+.recherche { width: 100%; max-width: 520px; border: 1.5px solid var(--trait); border-radius: 14px; padding: 12px 14px; font-size: 16px; background: #fff; outline: none; }
+.recherche:focus { border-color: var(--teal); }
+.puces { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+.puce { flex: none; border: 1.5px solid var(--trait); background: #fff; border-radius: 999px; padding: 8px 14px; font-weight: 700; font-size: 14px; cursor: pointer; color: var(--encre); }
+.puce.active { background: var(--nuit); border-color: var(--nuit); color: #fff; }
+.groupe-outils { margin-top: 26px; }
+.titre-groupe { font-size: 15px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--gris); margin: 0 0 12px; display: flex; align-items: center; gap: 10px; }
+.titre-groupe::after { content: ''; flex: 1; height: 1px; background: var(--trait); }
+.doc table.compact td { padding: 4px 10px; font-size: 11px; line-height: 1.35; }
+.doc table.compact th { padding: 6px 10px; }
+#outils { scroll-margin-top: 64px; }
+@media (max-width: 560px) {
+  .grille-outils { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .carte-outil { padding: 14px; gap: 6px; border-radius: 14px; }
+  .carte-outil .ico { width: 38px; height: 38px; font-size: 19px; border-radius: 11px; }
+  .carte-outil h3 { font-size: 15px; }
+  .carte-outil p { font-size: 12.5px; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .carte-outil .aller { display: none; }
+  .carte-outil .badge { top: 10px; right: 10px; }
+}

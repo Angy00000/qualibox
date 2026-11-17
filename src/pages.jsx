@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link, NavLink, Outlet, useNavigate, useParams } from 'react-router-dom';
-import { BIENTOT, OUTILS, outil as trouverOutil } from './tools/index.js';
+import { BIENTOT, CATEGORIES, OUTILS, outil as trouverOutil } from './tools/index.js';
 import { Doc } from './components/Doc.jsx';
 import { Champ } from './components/Champs.jsx';
 import { creerPdf, ecrireBrouillon, ecrireEntreprise, lienExpert, lireBrouillon, lireEntreprise, nomFichier, partager, reduireImage, SITE, telecharger } from './lib.js';
@@ -30,6 +30,62 @@ export function Cadre() {
 }
 
 /* ---------------- Accueil ---------------- */
+const sansAccent = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+
+function CarteOutil({ o }) {
+  return (
+    <Link to={`/outil/${o.id}`} className="carte-outil">
+      <span className="ico">{o.ico}</span>
+      <h3>{o.nom}</h3>
+      <p>{o.court}</p>
+      <span className="aller">Utiliser l’outil →</span>
+    </Link>
+  );
+}
+
+/** Outils de l'accueil : filtre par catégorie et recherche. */
+function ChoixOutils() {
+  const [cat, setCat] = useState('tous');
+  const [q, setQ] = useState('');
+  const terme = sansAccent(q.trim());
+  const filtre = (o) => !terme || sansAccent(`${o.nom} ${o.court}`).includes(terme);
+  const groupes = CATEGORIES.filter((c) => cat === 'tous' || c.k === cat).map((c) => ({ ...c, outils: c.outils.filter(filtre) })).filter((c) => c.outils.length);
+  return (
+    <>
+      <div className="filtres">
+        <input className="recherche" type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="🔎 Chercher un outil : HACCP, audit, causes…" aria-label="Chercher un outil" />
+        <div className="puces">
+          {[{ k: 'tous', nom: `Tous (${OUTILS.length})` }, ...CATEGORIES].map((c) => (
+            <button key={c.k} type="button" className={`puce${cat === c.k ? ' active' : ''}`} onClick={() => setCat(c.k)}>{c.nom}</button>
+          ))}
+        </div>
+      </div>
+      {groupes.map((c) => (
+        <div key={c.k} className="groupe-outils">
+          <h3 className="titre-groupe">{c.nom}</h3>
+          <div className="grille-outils">{c.outils.map((o) => <CarteOutil key={o.id} o={o} />)}</div>
+        </div>
+      ))}
+      {!groupes.length && <p style={{ color: 'var(--gris)' }}>Aucun outil ne correspond à « {q} ».</p>}
+      {cat === 'tous' && !terme && (
+        <div className="groupe-outils">
+          <h3 className="titre-groupe">Bientôt</h3>
+          <div className="grille-outils">
+            {BIENTOT.map((o) => (
+              <div key={o.id} className="carte-outil bientot">
+                <span className="badge">Bientôt</span>
+                <span className="ico">{o.ico}</span>
+                <h3>{o.nom}</h3>
+                <p>{o.court}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
 export function Accueil() {
   useEffect(() => { document.title = 'QualiBox · Tous vos outils qualité, au même endroit'; }, []);
   return (
@@ -73,27 +129,10 @@ export function Accueil() {
       <section className="section" id="outils">
         <div className="section-tete">
           <span className="surtitre">La boîte à outils</span>
-          <h2>Choisissez votre outil</h2>
+          <h2>Choisissez parmi {OUTILS.length} outils</h2>
           <p>Chaque outil vient avec une fiche simple et un exemple réel pris au Sénégal. Votre travail reste enregistré sur votre téléphone.</p>
         </div>
-        <div className="grille-outils">
-          {OUTILS.map((o) => (
-            <Link key={o.id} to={`/outil/${o.id}`} className="carte-outil">
-              <span className="ico">{o.ico}</span>
-              <h3>{o.nom}</h3>
-              <p>{o.court}</p>
-              <span className="aller">Utiliser l’outil →</span>
-            </Link>
-          ))}
-          {BIENTOT.map((o) => (
-            <div key={o.id} className="carte-outil bientot">
-              <span className="badge">Bientôt</span>
-              <span className="ico">{o.ico}</span>
-              <h3>{o.nom}</h3>
-              <p>{o.court}</p>
-            </div>
-          ))}
-        </div>
+        <ChoixOutils />
       </section>
 
       <section className="section" style={{ paddingTop: 10 }}>
