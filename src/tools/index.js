@@ -14,22 +14,26 @@ import { auditHaccp } from './auditHaccp.jsx';
 import { auditIso45001 } from './auditIso45001.jsx';
 import { carteControle } from './carteControle.jsx';
 import { indicateurs } from './indicateurs.jsx';
+import { auditIso14001 } from './auditIso14001.jsx';
+import { aspectsEnv } from './aspectsEnv.jsx';
+import { ficheNc } from './ficheNc.jsx';
+import { revueDirection } from './revueDirection.jsx';
 
 /** Catégories de l'accueil, dans l'ordre d'une démarche qualité. */
 export const CATEGORIES = [
-  { k: 'probleme', nom: 'Résoudre un problème', outils: [qqoqcp, pareto, ishikawa, cinqPourquoi, huitD] },
-  { k: 'risques', nom: 'Risques et sécurité des aliments', outils: [matriceRisques, amdec, haccp] },
-  { k: 'audits', nom: 'Audits et normes', outils: [auditIso9001, auditHaccp, auditIso45001] },
-  { k: 'piloter', nom: 'Piloter et mesurer', outils: [planAction, pdca, indicateurs, carteControle, swot] },
+  { k: 'probleme', nom: 'Résoudre un problème', outils: [qqoqcp, pareto, ishikawa, cinqPourquoi, huitD, ficheNc] },
+  { k: 'risques', nom: 'Risques, aliments et environnement', outils: [matriceRisques, amdec, haccp, aspectsEnv] },
+  { k: 'audits', nom: 'Audits et normes', outils: [auditIso9001, auditHaccp, auditIso45001, auditIso14001] },
+  { k: 'piloter', nom: 'Piloter et mesurer', outils: [planAction, pdca, indicateurs, carteControle, revueDirection, swot] },
 ];
 
 export const OUTILS = CATEGORIES.flatMap((c) => c.outils);
 
 export const BIENTOT = [
-  { id: 'audit-iso-14001', nom: 'Check-list ISO 14001', ico: '🌱', court: 'Auditer le management environnemental.' },
-  { id: 'aspects-env', nom: 'Aspects et impacts environnementaux', ico: '🌍', court: 'Identifier et coter les impacts de vos activités sur l’environnement.' },
-  { id: 'fiche-nc', nom: 'Fiche de non-conformité', ico: '🧾', court: 'Enregistrer, traiter et clôturer une non-conformité.' },
-  { id: 'revue-direction', nom: 'Revue de direction', ico: '🏛️', court: 'Préparer et tracer la revue de direction ISO 9001.' },
+  { id: 'eval-fournisseurs', nom: 'Évaluation des fournisseurs', ico: '🚚', court: 'Noter vos fournisseurs sur la qualité, les délais et le prix.' },
+  { id: 'plan-nettoyage', nom: 'Plan de nettoyage', ico: '🧽', court: 'Organiser et tracer le nettoyage et la désinfection.' },
+  { id: 'matrice-competences', nom: 'Matrice des compétences', ico: '🎓', court: 'Voir qui sait faire quoi et planifier les formations.' },
+  { id: 'registre-accidents', nom: 'Registre des accidents', ico: '🩹', court: 'Enregistrer les accidents et presque-accidents du travail.' },
 ];
 
 export const outil = (id) => OUTILS.find((o) => o.id === id);
