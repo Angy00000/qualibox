@@ -34,24 +34,29 @@ import { ficheProcessus } from './ficheProcessus.jsx';
 import { politiqueQualite } from './politiqueQualite.jsx';
 import { modeOperatoire } from './modeOperatoire.jsx';
 import { veilleReglementaire } from './veilleReglementaire.jsx';
+import { planFormation } from './planFormation.jsx';
+import { controleReception } from './controleReception.jsx';
+import { planUrgence } from './planUrgence.jsx';
+import { tracabilite } from './tracabilite.jsx';
 
 /** Catégories de l'accueil, dans l'ordre d'une démarche qualité. */
 export const CATEGORIES = [
   { k: 'probleme', nom: 'Résoudre un problème', outils: [qqoqcp, pareto, ishikawa, cinqPourquoi, huitD, ficheNc, reclamations] },
-  { k: 'risques', nom: 'Risques, hygiène, sécurité et environnement', outils: [matriceRisques, documentUnique, amdec, haccp, planNettoyage, registreAccidents, aspectsEnv] },
+  { k: 'risques', nom: 'Risques, santé-sécurité et environnement', outils: [matriceRisques, amdec, documentUnique, registreAccidents, planUrgence, aspectsEnv] },
+  { k: 'aliments', nom: 'Hygiène et sécurité des aliments', outils: [haccp, planNettoyage, controleReception, tracabilite] },
   { k: 'audits', nom: 'Audits et normes', outils: [auditIso9001, auditHaccp, auditIso45001, auditIso14001, audit5s, programmeAudits] },
   { k: 'piloter', nom: 'Piloter et mesurer', outils: [planAction, pdca, indicateurs, carteControle, satisfactionClient, revueDirection, swot] },
   { k: 'systeme', nom: 'Système qualité et documents', outils: [politiqueQualite, cartographie, ficheProcessus, modeOperatoire, veilleReglementaire] },
-  { k: 'ressources', nom: 'Personnel, fournisseurs et équipements', outils: [fichePoste, matriceCompetences, evalFournisseurs, etalonnage] },
+  { k: 'ressources', nom: 'Personnel, fournisseurs et équipements', outils: [fichePoste, matriceCompetences, planFormation, evalFournisseurs, etalonnage] },
 ];
 
 export const OUTILS = CATEGORIES.flatMap((c) => c.outils);
 
 export const BIENTOT = [
-  { id: 'plan-formation', nom: 'Plan de formation', ico: '📚', court: 'Planifier les formations de l’année et évaluer leur efficacité.' },
-  { id: 'controle-reception', nom: 'Contrôle à réception', ico: '📦', court: 'Vérifier chaque livraison : quantité, état, température, documents.' },
-  { id: 'plan-urgence', nom: 'Plan d’urgence', ico: '🚨', court: 'Préparer les situations d’urgence : incendie, accident, déversement.' },
-  { id: 'tracabilite', nom: 'Fiche de traçabilité', ico: '🔗', court: 'Suivre un lot de la matière première au client.' },
+  { id: 'releve-temperatures', nom: 'Relevé de températures', ico: '🌡️', court: 'Suivre les températures des frigos et chambres froides, avec alertes.' },
+  { id: 'nuisibles', nom: 'Lutte contre les nuisibles', ico: '🐀', court: 'Plan des pièges, passages du prestataire et constats.' },
+  { id: 'capabilite', nom: 'Capabilité (Cp, Cpk)', ico: '📐', court: 'Savoir si un procédé tient les tolérances, à partir de mesures.' },
+  { id: 'dechets', nom: 'Registre des déchets', ico: '♻️', court: 'Suivre les déchets produits, triés et enlevés, par filière.' },
 ];
 
 export const outil = (id) => OUTILS.find((o) => o.id === id);
