@@ -250,3 +250,8 @@ button, input, textarea, select { font: inherit; color: inherit; }
   .outil-page { padding-bottom: 96px; }
   .toast { bottom: 90px; }
 }
+
+/* AMDEC : tableau dense */
+.doc table.amdec { font-size: 10.5px; }
+.doc table.amdec th { font-size: 9px; padding: 7px 5px; letter-spacing: .4px; }
+.doc table.amdec td { padding: 6px 5px; }

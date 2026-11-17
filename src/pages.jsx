@@ -39,7 +39,7 @@ export function Accueil() {
           <div>
             <span className="pastille"><i />Gratuit · Fait à Dakar pour les qualiticiens</span>
             <h1>Tous vos outils qualité, <em>au même endroit.</em></h1>
-            <p className="lead">5 Pourquoi, Ishikawa, QQOQCP, matrice des risques… Remplissez-les sur votre téléphone en quelques minutes et repartez avec un PDF propre, au logo de votre entreprise.</p>
+            <p className="lead">Pareto, Ishikawa, 5 Pourquoi, 8D, AMDEC, PDCA… Remplissez-les sur votre téléphone en quelques minutes et repartez avec un PDF propre, au logo de votre entreprise.</p>
             <div className="hero-ctas">
               <a href="#outils" className="btn principal">Choisir un outil</a>
               <Link to="/mon-entreprise" className="btn secondaire">Ajouter mon logo</Link>

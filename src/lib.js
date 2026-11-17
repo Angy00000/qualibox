@@ -49,21 +49,35 @@ export function reduireImage(fichier, max = 360) {
 export async function creerPdf(element) {
   const [{ default: html2canvas }, { jsPDF }] = await Promise.all([import('html2canvas'), import('jspdf')]);
   await document.fonts?.ready;
-  const canvas = await html2canvas(element, { scale: 2, backgroundColor: '#ffffff', useCORS: true, logging: false });
+  const echelle = 2;
+  // Endroits où l'on peut couper une page : entre deux lignes de tableau ou deux blocs.
+  const haut = element.getBoundingClientRect().top;
+  const coupures = [...element.querySelectorAll('tr, h2, .evite-coupure, .maillon, .doc-encadre, .doc-meta')]
+    .filter((el) => !el.parentElement?.closest('.evite-coupure')) // on ne coupe jamais à l'intérieur d'un bloc insécable
+    .map((el) => Math.round((el.getBoundingClientRect().top - haut) * echelle))
+    .filter((v) => v > 0).sort((a, b) => a - b);
+  const canvas = await html2canvas(element, { scale: echelle, backgroundColor: '#ffffff', useCORS: true, logging: false });
   const pdf = new jsPDF({ unit: 'mm', format: 'a4', compress: true });
   const largeur = 210, hauteurPage = 297;
   const pxParMm = canvas.width / largeur;
   const hauteurPagePx = Math.floor(hauteurPage * pxParMm);
+  const marge = Math.round(14 * pxParMm); // marge en haut des pages suivantes
   let y = 0, page = 0;
   while (y < canvas.height - 4) {
-    const h = Math.min(hauteurPagePx, canvas.height - y);
+    const dispo = page === 0 ? hauteurPagePx : hauteurPagePx - marge;
+    const reste = canvas.height - y;
+    let h = reste <= dispo + 12 ? reste : dispo; // tolérance : une page pleine reste sur une page
+    if (h < reste) {
+      const coupe = coupures.filter((c) => c > y + dispo * 0.5 && c <= y + dispo).pop();
+      if (coupe) h = coupe - y;
+    }
     const morceau = document.createElement('canvas');
     morceau.width = canvas.width; morceau.height = h;
     const ctx = morceau.getContext('2d');
     ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, morceau.width, h);
     ctx.drawImage(canvas, 0, y, canvas.width, h, 0, 0, canvas.width, h);
     if (page > 0) pdf.addPage();
-    pdf.addImage(morceau.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, largeur, h / pxParMm);
+    pdf.addImage(morceau.toDataURL('image/jpeg', 0.92), 'JPEG', 0, page === 0 ? 0 : marge / pxParMm, largeur, h / pxParMm);
     y += h; page += 1;
   }
   return pdf.output('blob');
