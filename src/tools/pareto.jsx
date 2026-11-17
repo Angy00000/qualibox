@@ -22,7 +22,7 @@ export function calculPareto(categories) {
 const fmt = (n) => n.toLocaleString('fr-FR', { maximumFractionDigits: 1 });
 
 function Graphique({ lignes }) {
-  const W = 698, H = 300, g = 46, d = 46, h = 20, b = 70;
+  const W = 698, H = 270, g = 46, d = 46, h = 20, b = 70;
   const lw = W - g - d, lh = H - h - b;
   const max = Math.max(...lignes.map((l) => l.nb), 1);
   const pas = lw / Math.max(lignes.length, 1);
@@ -130,7 +130,7 @@ export const pareto = {
           </div>
         )}
         <h2>Tableau</h2>
-        <table>
+        <table className="compact">
           <thead><tr><th>Catégorie</th><th style={{ width: 90 }}>Nombre</th><th style={{ width: 70 }}>%</th><th style={{ width: 90 }}>% cumulé</th></tr></thead>
           <tbody>
             {lignes.map((l, i) => (

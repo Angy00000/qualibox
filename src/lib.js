@@ -70,7 +70,8 @@ export async function creerPdf(element) {
   while (y < canvas.height - 4) {
     const dispo = page === 0 ? hauteurPagePx : hauteurPagePx - marge;
     const reste = canvas.height - y;
-    let h = reste <= dispo + 12 ? reste : dispo; // tolérance : une page pleine reste sur une page
+    // Tolérance : si ce qui reste dépasse la page de 6 % au plus, on le réduit légèrement pour tout garder sur la page.
+    let h = reste <= dispo * 1.06 ? reste : dispo;
     if (h < reste) {
       const coupe = coupuresOk.filter((c) => c > y + dispo * 0.5 && c <= y + dispo).pop();
       if (coupe) h = coupe - y;
@@ -81,7 +82,9 @@ export async function creerPdf(element) {
     ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, morceau.width, h);
     ctx.drawImage(canvas, 0, y, canvas.width, h, 0, 0, canvas.width, h);
     if (page > 0) pdf.addPage();
-    pdf.addImage(morceau.toDataURL('image/jpeg', 0.92), 'JPEG', 0, page === 0 ? 0 : marge / pxParMm, largeur, h / pxParMm);
+    const reduction = Math.min(1, dispo / h); // 1 sauf pour un dernier morceau un peu trop haut
+    const l = largeur * reduction;
+    pdf.addImage(morceau.toDataURL('image/jpeg', 0.92), 'JPEG', (largeur - l) / 2, page === 0 ? 0 : marge / pxParMm, l, (h / pxParMm) * reduction);
     y += h; page += 1;
   }
   return pdf.output('blob');

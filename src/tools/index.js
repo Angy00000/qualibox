@@ -22,22 +22,27 @@ import { evalFournisseurs } from './evalFournisseurs.jsx';
 import { planNettoyage } from './planNettoyage.jsx';
 import { matriceCompetences } from './matriceCompetences.jsx';
 import { registreAccidents } from './registreAccidents.jsx';
+import { audit5s } from './audit5s.jsx';
+import { satisfactionClient } from './satisfactionClient.jsx';
+import { fichePoste } from './fichePoste.jsx';
+import { etalonnage } from './etalonnage.jsx';
 
 /** Catégories de l'accueil, dans l'ordre d'une démarche qualité. */
 export const CATEGORIES = [
   { k: 'probleme', nom: 'Résoudre un problème', outils: [qqoqcp, pareto, ishikawa, cinqPourquoi, huitD, ficheNc] },
   { k: 'risques', nom: 'Risques, hygiène, sécurité et environnement', outils: [matriceRisques, amdec, haccp, planNettoyage, registreAccidents, aspectsEnv] },
-  { k: 'audits', nom: 'Audits et normes', outils: [auditIso9001, auditHaccp, auditIso45001, auditIso14001] },
-  { k: 'piloter', nom: 'Piloter et mesurer', outils: [planAction, pdca, indicateurs, carteControle, evalFournisseurs, matriceCompetences, revueDirection, swot] },
+  { k: 'audits', nom: 'Audits et normes', outils: [auditIso9001, auditHaccp, auditIso45001, auditIso14001, audit5s] },
+  { k: 'piloter', nom: 'Piloter et mesurer', outils: [planAction, pdca, indicateurs, carteControle, satisfactionClient, revueDirection, swot] },
+  { k: 'ressources', nom: 'Personnel, fournisseurs et équipements', outils: [fichePoste, matriceCompetences, evalFournisseurs, etalonnage] },
 ];
 
 export const OUTILS = CATEGORIES.flatMap((c) => c.outils);
 
 export const BIENTOT = [
-  { id: 'audit-5s', nom: 'Audit 5S', ico: '🧹', court: 'Noter le rangement et la propreté d’un poste, avec photos avant / après.' },
-  { id: 'satisfaction-client', nom: 'Enquête de satisfaction', ico: '😊', court: 'Construire le questionnaire et analyser les réponses de vos clients.' },
-  { id: 'fiche-poste', nom: 'Fiche de poste', ico: '🪪', court: 'Décrire missions, responsabilités et compétences d’un poste.' },
-  { id: 'etalonnage', nom: 'Suivi de l’étalonnage', ico: '⚖️', court: 'Lister vos instruments de mesure et leurs dates d’étalonnage.' },
+  { id: 'reclamations', nom: 'Traitement des réclamations', ico: '📣', court: 'Enregistrer et suivre les réclamations clients jusqu’à la réponse.' },
+  { id: 'cartographie', nom: 'Cartographie des processus', ico: '🗺️', court: 'Dessiner vos processus de pilotage, de réalisation et de support.' },
+  { id: 'document-unique', nom: 'Évaluation des risques professionnels', ico: '🦺', court: 'Le document unique : dangers, risques et mesures par unité de travail.' },
+  { id: 'programme-audits', nom: 'Programme d’audits', ico: '📅', court: 'Planifier les audits internes de l’année, processus par processus.' },
 ];
 
 export const outil = (id) => OUTILS.find((o) => o.id === id);
