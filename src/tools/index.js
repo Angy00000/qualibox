@@ -26,23 +26,27 @@ import { audit5s } from './audit5s.jsx';
 import { satisfactionClient } from './satisfactionClient.jsx';
 import { fichePoste } from './fichePoste.jsx';
 import { etalonnage } from './etalonnage.jsx';
+import { reclamations } from './reclamations.jsx';
+import { cartographie } from './cartographie.jsx';
+import { documentUnique } from './documentUnique.jsx';
+import { programmeAudits } from './programmeAudits.jsx';
 
 /** Catégories de l'accueil, dans l'ordre d'une démarche qualité. */
 export const CATEGORIES = [
-  { k: 'probleme', nom: 'Résoudre un problème', outils: [qqoqcp, pareto, ishikawa, cinqPourquoi, huitD, ficheNc] },
-  { k: 'risques', nom: 'Risques, hygiène, sécurité et environnement', outils: [matriceRisques, amdec, haccp, planNettoyage, registreAccidents, aspectsEnv] },
-  { k: 'audits', nom: 'Audits et normes', outils: [auditIso9001, auditHaccp, auditIso45001, auditIso14001, audit5s] },
-  { k: 'piloter', nom: 'Piloter et mesurer', outils: [planAction, pdca, indicateurs, carteControle, satisfactionClient, revueDirection, swot] },
+  { k: 'probleme', nom: 'Résoudre un problème', outils: [qqoqcp, pareto, ishikawa, cinqPourquoi, huitD, ficheNc, reclamations] },
+  { k: 'risques', nom: 'Risques, hygiène, sécurité et environnement', outils: [matriceRisques, documentUnique, amdec, haccp, planNettoyage, registreAccidents, aspectsEnv] },
+  { k: 'audits', nom: 'Audits et normes', outils: [auditIso9001, auditHaccp, auditIso45001, auditIso14001, audit5s, programmeAudits] },
+  { k: 'piloter', nom: 'Piloter et mesurer', outils: [cartographie, planAction, pdca, indicateurs, carteControle, satisfactionClient, revueDirection, swot] },
   { k: 'ressources', nom: 'Personnel, fournisseurs et équipements', outils: [fichePoste, matriceCompetences, evalFournisseurs, etalonnage] },
 ];
 
 export const OUTILS = CATEGORIES.flatMap((c) => c.outils);
 
 export const BIENTOT = [
-  { id: 'reclamations', nom: 'Traitement des réclamations', ico: '📣', court: 'Enregistrer et suivre les réclamations clients jusqu’à la réponse.' },
-  { id: 'cartographie', nom: 'Cartographie des processus', ico: '🗺️', court: 'Dessiner vos processus de pilotage, de réalisation et de support.' },
-  { id: 'document-unique', nom: 'Évaluation des risques professionnels', ico: '🦺', court: 'Le document unique : dangers, risques et mesures par unité de travail.' },
-  { id: 'programme-audits', nom: 'Programme d’audits', ico: '📅', court: 'Planifier les audits internes de l’année, processus par processus.' },
+  { id: 'fiche-processus', nom: 'Fiche processus', ico: '🔄', court: 'Décrire un processus : finalité, entrées, sorties, activités, pilote et indicateurs.' },
+  { id: 'politique-qualite', nom: 'Politique qualité', ico: '🎯', court: 'Rédiger l’engagement de la direction et les objectifs qualité.' },
+  { id: 'mode-operatoire', nom: 'Mode opératoire', ico: '📝', court: 'Écrire une instruction de travail étape par étape, avec points clés.' },
+  { id: 'veille-reglementaire', nom: 'Veille réglementaire', ico: '⚖️', court: 'Lister les textes qui s’appliquent et évaluer votre conformité.' },
 ];
 
 export const outil = (id) => OUTILS.find((o) => o.id === id);
