@@ -114,4 +114,5 @@ export async function partager(blob, nom, texte) {
   return 'whatsapp';
 }
 
+export const lienDiagnostic = (outil) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Bonjour Angy Qualité, j'utilise QualiBox${outil ? ` (outil : ${outil})` : ''} et je souhaite un diagnostic qualité gratuit pour mon entreprise.`)}`;
 export const lienExpert = (sujet) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Bonjour Angy Company, j'utilise QualiBox et j'aimerais l'aide d'un expert qualité${sujet ? ` (${sujet})` : ''}.`)}`;

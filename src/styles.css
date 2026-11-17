@@ -278,3 +278,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
   .carte-outil .aller { display: none; }
   .carte-outil .badge { top: 10px; right: 10px; }
 }
+
+.carte-accompagnement { margin-top: 16px; border: 1.5px solid #bbf7d0; background: linear-gradient(135deg, #f0fdf4, #fff); border-radius: 18px; padding: 18px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between; }
+.carte-accompagnement b { font-family: 'Sora'; font-size: 16px; }
+.carte-accompagnement p { margin: 4px 0 0; color: var(--gris); font-size: 14px; line-height: 1.55; max-width: 520px; }

@@ -4,7 +4,7 @@ import { BIENTOT, CATEGORIES, OUTILS, outil as trouverOutil } from './tools/inde
 import { Doc } from './components/Doc.jsx';
 import { Champ } from './components/Champs.jsx';
 import { track } from '@vercel/analytics';
-import { creerPdf, ecrireBrouillon, ecrireEntreprise, lienExpert, lireBrouillon, lireEntreprise, nomFichier, partager, reduireImage, SITE, telecharger } from './lib.js';
+import { creerPdf, ecrireBrouillon, ecrireEntreprise, lienDiagnostic, lienExpert, lireBrouillon, lireEntreprise, nomFichier, partager, reduireImage, SITE, telecharger } from './lib.js';
 
 /* ---------------- Cadre ---------------- */
 export function Cadre() {
@@ -152,10 +152,10 @@ export function Accueil() {
       <section className="section" style={{ paddingTop: 10 }}>
         <div className="bandeau-expert">
           <div>
-            <h3>Besoin d’aller plus loin ?</h3>
-            <p>Audit, mise en place d’un système qualité, HACCP, ISO 9001, ISO 22000, ISO 45001 : les experts d’Angy Company vous accompagnent.</p>
+            <h3>Objectif certification ?</h3>
+            <p>Angy Qualité accompagne les PME jusqu’à la certification ISO 9001, HACCP ou ISO 22000 : diagnostic, documents, formation, audit blanc. Prix fixe payé en trois fois, premier diagnostic gratuit.</p>
           </div>
-          <a className="btn wa" href={lienExpert()} target="_blank" rel="noopener">💬 Parler à un expert</a>
+          <a className="btn wa" href={lienDiagnostic()} target="_blank" rel="noopener" onClick={() => track('diagnostic_demande', { outil: 'accueil' })}>💬 Demander mon diagnostic gratuit</a>
         </div>
       </section>
     </>
@@ -246,6 +246,13 @@ export function PageOutil() {
             {!entreprise.nom && <p className="aide">Astuce : <Link to="/mon-entreprise">ajoutez le nom et le logo de votre entreprise</Link> pour qu’ils apparaissent sur le PDF.</p>}
           </div>
           <div style={{ marginTop: 16 }}><Formulaire data={data} set={set} /></div>
+          <div className="carte-accompagnement">
+            <div>
+              <b>Vous visez une certification ?</b>
+              <p>ISO 9001, HACCP, ISO 22000 : Angy Qualité accompagne les PME jusqu’au certificat, avec un prix fixe payé en trois fois. Le premier diagnostic est gratuit.</p>
+            </div>
+            <a className="btn wa" href={lienDiagnostic(o.nom)} target="_blank" rel="noopener" onClick={() => track('diagnostic_demande', { outil: o.id })}>💬 Demander mon diagnostic gratuit</a>
+          </div>
         </div>
         <div className="apercu-col">
           <div className="actions-barre">
