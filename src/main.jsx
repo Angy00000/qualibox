@@ -3,7 +3,11 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Accueil, Cadre, MonEntreprise, PageOutil } from './pages.jsx';
+import { inject } from '@vercel/analytics';
 import './styles.css';
+
+// Mesure d'audience Vercel (pages vues, sans cookie).
+inject();
 
 function HautDePage() {
   const { pathname, hash } = useLocation();

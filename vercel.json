@@ -1,5 +1,5 @@
 {
-  "rewrites": [{ "source": "/((?!assets/|icon|favicon|q-|apple-touch|og-image|manifest|sw\\.js).*)", "destination": "/index.html" }],
+  "rewrites": [{ "source": "/((?!_vercel/|assets/|icon|favicon|q-|apple-touch|og-image|manifest|sw\\.js).*)", "destination": "/index.html" }],
   "headers": [
     {
       "source": "/(.*)",

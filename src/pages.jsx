@@ -3,6 +3,7 @@ import { Link, NavLink, Outlet, useNavigate, useParams } from 'react-router-dom'
 import { BIENTOT, CATEGORIES, OUTILS, outil as trouverOutil } from './tools/index.js';
 import { Doc } from './components/Doc.jsx';
 import { Champ } from './components/Champs.jsx';
+import { track } from '@vercel/analytics';
 import { creerPdf, ecrireBrouillon, ecrireEntreprise, lienExpert, lireBrouillon, lireEntreprise, nomFichier, partager, reduireImage, SITE, telecharger } from './lib.js';
 
 /* ---------------- Cadre ---------------- */
@@ -206,7 +207,8 @@ export function PageOutil() {
       if (mode === 'partage') {
         const r = await partager(blob, nom, `${o.nom}${data.titre ? ` — ${data.titre}` : ''} (fait avec QualiBox : https://${SITE})`);
         if (r === 'whatsapp') setToast('PDF téléchargé : joignez-le dans WhatsApp.');
-      } else { telecharger(blob, nom); setToast('PDF téléchargé.'); }
+        track('pdf_partage', { outil: o.id });
+      } else { telecharger(blob, nom); setToast('PDF téléchargé.'); track('pdf_telecharge', { outil: o.id }); }
     } catch { setToast('Le PDF n’a pas pu être créé. Réessayez.'); }
     finally { setOccupe(false); }
   };
