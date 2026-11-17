@@ -42,7 +42,7 @@ function Graphique({ lignes }) {
       <line x1={g} x2={W - d} y1={yD(80)} y2={yD(80)} stroke="#e5484d" strokeDasharray="5 4" strokeWidth="1.5" />
       <text x={W - d - 4} y={yD(80) - 5} fontSize="10" fill="#e5484d" fontWeight="700" textAnchor="end">seuil 80 %</text>
       {lignes.map((l, i) => (
-        <g key={l.nom}>
+        <g key={i}>
           <rect x={x(i) - pas * 0.36} y={yG(l.nb)} width={pas * 0.72} height={h + lh - yG(l.nb)} rx="4" fill={l.vitale ? '#16a34a' : '#b8c4d4'} />
           <text x={x(i)} y={yG(l.nb) - 5} fontSize="10.5" fontWeight="700" fill="#13203a" textAnchor="middle">{fmt(l.nb)}</text>
           <text x={x(i)} y={h + lh + 14} fontSize="10" fill="#4a5770" textAnchor="end" transform={`rotate(-30 ${x(i)} ${h + lh + 14})`}>{l.nom.length > 22 ? l.nom.slice(0, 21) + '…' : l.nom}</text>
@@ -133,8 +133,8 @@ export const pareto = {
         <table>
           <thead><tr><th>Catégorie</th><th style={{ width: 90 }}>Nombre</th><th style={{ width: 70 }}>%</th><th style={{ width: 90 }}>% cumulé</th></tr></thead>
           <tbody>
-            {lignes.map((l) => (
-              <tr key={l.nom}><td>{l.vitale ? <b>{l.nom}</b> : l.nom}</td><td>{fmt(l.nb)}</td><td>{fmt(l.pct)} %</td><td>{fmt(l.cumul)} %</td></tr>
+            {lignes.map((l, i) => (
+              <tr key={i}><td>{l.vitale ? <b>{l.nom}</b> : l.nom}</td><td>{fmt(l.nb)}</td><td>{fmt(l.pct)} %</td><td>{fmt(l.cumul)} %</td></tr>
             ))}
             {lignes.length > 0 && <tr><td><b>Total</b></td><td><b>{fmt(total)}</b></td><td>100 %</td><td /></tr>}
           </tbody>

@@ -18,22 +18,26 @@ import { auditIso14001 } from './auditIso14001.jsx';
 import { aspectsEnv } from './aspectsEnv.jsx';
 import { ficheNc } from './ficheNc.jsx';
 import { revueDirection } from './revueDirection.jsx';
+import { evalFournisseurs } from './evalFournisseurs.jsx';
+import { planNettoyage } from './planNettoyage.jsx';
+import { matriceCompetences } from './matriceCompetences.jsx';
+import { registreAccidents } from './registreAccidents.jsx';
 
 /** Catégories de l'accueil, dans l'ordre d'une démarche qualité. */
 export const CATEGORIES = [
   { k: 'probleme', nom: 'Résoudre un problème', outils: [qqoqcp, pareto, ishikawa, cinqPourquoi, huitD, ficheNc] },
-  { k: 'risques', nom: 'Risques, aliments et environnement', outils: [matriceRisques, amdec, haccp, aspectsEnv] },
+  { k: 'risques', nom: 'Risques, hygiène, sécurité et environnement', outils: [matriceRisques, amdec, haccp, planNettoyage, registreAccidents, aspectsEnv] },
   { k: 'audits', nom: 'Audits et normes', outils: [auditIso9001, auditHaccp, auditIso45001, auditIso14001] },
-  { k: 'piloter', nom: 'Piloter et mesurer', outils: [planAction, pdca, indicateurs, carteControle, revueDirection, swot] },
+  { k: 'piloter', nom: 'Piloter et mesurer', outils: [planAction, pdca, indicateurs, carteControle, evalFournisseurs, matriceCompetences, revueDirection, swot] },
 ];
 
 export const OUTILS = CATEGORIES.flatMap((c) => c.outils);
 
 export const BIENTOT = [
-  { id: 'eval-fournisseurs', nom: 'Évaluation des fournisseurs', ico: '🚚', court: 'Noter vos fournisseurs sur la qualité, les délais et le prix.' },
-  { id: 'plan-nettoyage', nom: 'Plan de nettoyage', ico: '🧽', court: 'Organiser et tracer le nettoyage et la désinfection.' },
-  { id: 'matrice-competences', nom: 'Matrice des compétences', ico: '🎓', court: 'Voir qui sait faire quoi et planifier les formations.' },
-  { id: 'registre-accidents', nom: 'Registre des accidents', ico: '🩹', court: 'Enregistrer les accidents et presque-accidents du travail.' },
+  { id: 'audit-5s', nom: 'Audit 5S', ico: '🧹', court: 'Noter le rangement et la propreté d’un poste, avec photos avant / après.' },
+  { id: 'satisfaction-client', nom: 'Enquête de satisfaction', ico: '😊', court: 'Construire le questionnaire et analyser les réponses de vos clients.' },
+  { id: 'fiche-poste', nom: 'Fiche de poste', ico: '🪪', court: 'Décrire missions, responsabilités et compétences d’un poste.' },
+  { id: 'etalonnage', nom: 'Suivi de l’étalonnage', ico: '⚖️', court: 'Lister vos instruments de mesure et leurs dates d’étalonnage.' },
 ];
 
 export const outil = (id) => OUTILS.find((o) => o.id === id);
