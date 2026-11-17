@@ -54,8 +54,12 @@ export async function creerPdf(element) {
   const haut = element.getBoundingClientRect().top;
   const coupures = [...element.querySelectorAll('tr, h2, .evite-coupure, .maillon, .doc-encadre, .doc-meta')]
     .filter((el) => !el.parentElement?.closest('.evite-coupure')) // on ne coupe jamais à l'intérieur d'un bloc insécable
-    .map((el) => Math.round((el.getBoundingClientRect().top - haut) * echelle))
-    .filter((v) => v > 0).sort((a, b) => a - b);
+    .filter((el) => !(el.tagName === 'TR' && el.parentElement?.tagName === 'TBODY' && !el.previousElementSibling)) // ni entre l'en-tête d'un tableau et sa première ligne
+    .map((el) => ({ y: Math.round((el.getBoundingClientRect().top - haut) * echelle), titre: el.tagName === 'H2' }))
+    .filter((c) => c.y > 0);
+  const titres = coupures.filter((c) => c.titre).map((c) => c.y);
+  // Un titre de section ne reste jamais seul en bas de page : on ne coupe pas juste après lui.
+  const coupuresOk = coupures.filter((c) => c.titre || !titres.some((t) => c.y > t && c.y - t < 90 * echelle)).map((c) => c.y).sort((a, b) => a - b);
   const canvas = await html2canvas(element, { scale: echelle, backgroundColor: '#ffffff', useCORS: true, logging: false });
   const pdf = new jsPDF({ unit: 'mm', format: 'a4', compress: true });
   const largeur = 210, hauteurPage = 297;
@@ -68,7 +72,7 @@ export async function creerPdf(element) {
     const reste = canvas.height - y;
     let h = reste <= dispo + 12 ? reste : dispo; // tolérance : une page pleine reste sur une page
     if (h < reste) {
-      const coupe = coupures.filter((c) => c > y + dispo * 0.5 && c <= y + dispo).pop();
+      const coupe = coupuresOk.filter((c) => c > y + dispo * 0.5 && c <= y + dispo).pop();
       if (coupe) h = coupe - y;
     }
     const morceau = document.createElement('canvas');
